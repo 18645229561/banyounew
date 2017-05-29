@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Created by renpeng on 17/5/29.
  */
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends FragmentActivity implements View.OnClickListener{
 
     TextView mTextView;
+
+    Button mButton;
 
 
     @Override
@@ -25,11 +29,26 @@ public class LoginActivity extends FragmentActivity {
 
         mTextView = (TextView) findViewById(R.id.register);
         mTextView.setText(Html.fromHtml("<u>"+"没有账号?快来注册!"+"</u>"));
+
+        mButton = (Button) findViewById(R.id.login);
+        mButton.setOnClickListener(this);
     }
 
     public static void startLogioActivity(Activity mActivity)
     {
         Intent intent = new Intent(mActivity,LoginActivity.class);
         mActivity.startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.login:
+                HomeActivity.startHomeActivity(LoginActivity.this);
+                break;
+            default:
+                break;
+        }
     }
 }
