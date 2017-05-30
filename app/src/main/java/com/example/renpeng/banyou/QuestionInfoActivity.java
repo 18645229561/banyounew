@@ -35,7 +35,7 @@ public class QuestionInfoActivity extends FragmentActivity {
 
     private Button mButton;
 
-    private List<String> commitResults =new ArrayList<String>();
+    private Map<String,String> commitResults = new HashMap<>();
 
 
     private String username;
@@ -100,12 +100,25 @@ public class QuestionInfoActivity extends FragmentActivity {
         HttpUtils.post(url, requestParams,new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
+                Toast.makeText(QuestionInfoActivity.this,"出错啦!",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                JSONTokener tokener = new JSONTokener(responseString);
 
+                try {
+                    JSONObject json = (JSONObject) tokener.nextValue();
+                    String result = json.getString("result");
+                    String info = json.getString("info");
+                    if("true" == result){
+                        HomeActivity.startHomeActivity(QuestionInfoActivity.this);
+                    }else{
+                        Toast.makeText(QuestionInfoActivity.this,info,Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -124,10 +137,10 @@ public class QuestionInfoActivity extends FragmentActivity {
 
         for(int i = 0;i<n;i++){
             if(i == n-1){
-                stringBuilder.append(commitResults.get(i));
+                stringBuilder.append(commitResults.get(i+""));
                 break;
             }
-            stringBuilder.append(commitResults.get(i)+",");
+            stringBuilder.append(commitResults.get(i+"")+",");
         }
 
         map.put("text",stringBuilder.toString());

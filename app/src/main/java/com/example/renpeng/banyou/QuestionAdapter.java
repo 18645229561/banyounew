@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by renpeng on 17/5/30.
@@ -17,9 +18,9 @@ public class QuestionAdapter extends BaseAdapter {
 
     private List<String> list;
 
-    private List<String> results;
+    private Map<String,String> results;
 
-    public QuestionAdapter(List<String> list,List<String> results){
+    public QuestionAdapter(List<String> list,Map<String,String> results){
         this.list = list;
         this.results = results;
     }
@@ -51,13 +52,13 @@ public class QuestionAdapter extends BaseAdapter {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.redio1:
-                        results.add(position,"1");
+                        results.put(position+"","1");
                         break;
                     case R.id.redio2:
-                        results.add(position,"2");
+                        results.put(position+"","2");
                         break;
                     case R.id.redio3:
-                        results.add(position,"3");
+                        results.put(position+"","3");
                         break;
                     default:
                         break;
