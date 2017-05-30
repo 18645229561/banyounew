@@ -35,6 +35,7 @@
         android:padding="2dp"
         android:textColor="#000000"
         android:textColorHint="#999999"
+        android:inputType="textPassword"
         android:background="@drawable/theme_shape"
         />
     <Button
