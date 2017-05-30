@@ -28,7 +28,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private String username;
     private String password;
     private String surePassword;
-    private String sex;
+    private int sex;
     private String age;
     private String nickName;
 
@@ -67,7 +67,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.next:
                 if(checkInfoEmpty()){
-                    QuestionInfoActivity.startQuestionInfoActivity(this);
+                    QuestionInfoActivity.startQuestionInfoActivity(this,username,password,sex,age,nickName);
                 }
                 break;
             case R.id.sex:
@@ -101,7 +101,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         username = mUserNameEditText.getText().toString();
         password = mPassWordEditText.getText().toString();
         surePassword = mSurePasswordEditText.getText().toString();
-        sex = mSexTextView.getText().toString();
+        sex = "男" == mSexTextView.getText().toString()?1:0;
         age = mAgeTextView.getText().toString();
         nickName = mNickNameEditText.getText().toString();
 
@@ -120,7 +120,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             return false;
         }
 
-        if(TextUtils.isEmpty(sex)){
+        if(TextUtils.isEmpty(sex+"")){
             Toast.makeText(this,"请选择性别",Toast.LENGTH_SHORT).show();
             return false;
         }
