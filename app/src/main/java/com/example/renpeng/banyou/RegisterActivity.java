@@ -1,6 +1,7 @@
 package com.example.renpeng.banyou;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -22,12 +23,16 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private EditText mSurePasswordEditText;
     private TextView mSexTextView;
     private TextView mAgeTextView;
+    private EditText mNickNameEditText;
 
     private String username;
     private String password;
     private String surePassword;
     private String sex;
     private String age;
+    private String nickName;
+
+    private Dialog mSelectSexDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +48,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         mSurePasswordEditText = (EditText) findViewById(R.id.sure_password);
         mSexTextView = (TextView) findViewById(R.id.sex);
         mAgeTextView = (TextView) findViewById(R.id.age);
+        mNickNameEditText = (EditText) findViewById(R.id.name);
 
         mSexTextView.setOnClickListener(this);
         mAgeTextView.setOnClickListener(this);
+        mButton.setOnClickListener(this);
 
 
     }
@@ -60,8 +67,29 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.next:
                 if(checkInfoEmpty()){
-
+                    QuestionInfoActivity.startQuestionInfoActivity(this);
                 }
+                break;
+            case R.id.sex:
+                mSelectSexDialog = DialogUtils.getSelectSexDialog(this, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (v.getId()){
+                            case R.id.btn_left:
+                                mSexTextView.setText("男");
+                                break;
+                            case R.id.btn_right:
+                                mSexTextView.setText("女");
+                                break;
+                            default:
+                                break;
+                        }
+                        mSelectSexDialog.dismiss();
+                    }
+                });
+                mSelectSexDialog.show();
+                break;
+            case R.id.age:
                 break;
             default:
                 break;
@@ -75,6 +103,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         surePassword = mSurePasswordEditText.getText().toString();
         sex = mSexTextView.getText().toString();
         age = mAgeTextView.getText().toString();
+        nickName = mNickNameEditText.getText().toString();
 
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this,"请填写用户名",Toast.LENGTH_SHORT).show();
@@ -98,6 +127,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
         if(TextUtils.isEmpty(age)){
             Toast.makeText(this,"请选择年龄",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(TextUtils.isEmpty(nickName)){
+            Toast.makeText(this,"请填写昵称",Toast.LENGTH_SHORT).show();
             return false;
         }
 
