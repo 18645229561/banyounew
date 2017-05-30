@@ -94,7 +94,7 @@ public class QuestionInfoActivity extends FragmentActivity {
     }
 
     private void commitRegisterInfo(){
-        String url = "http://192.168.1.101:8080/thundertech/user/regist";
+        String url = "http://47.93.205.29/thundertech/user/regist";
 
         RequestParams requestParams = new RequestParams(getParams());
         HttpUtils.post(url, requestParams,new TextHttpResponseHandler() {
@@ -149,7 +149,7 @@ public class QuestionInfoActivity extends FragmentActivity {
     }
 
     public void getQuestionInfo(){
-        String url = "http://192.168.1.101:8080/thundertech/subject/getSubjects";
+        String url = "http://47.93.205.29/thundertech/subject/getSubjects";
 
 
 
