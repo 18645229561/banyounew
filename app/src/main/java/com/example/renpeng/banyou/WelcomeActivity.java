@@ -23,7 +23,7 @@ public class WelcomeActivity extends FragmentActivity {
                     e.printStackTrace();
                 }
 
-                LoginActivity.startLogioActivity(WelcomeActivity.this);
+                LoginActivity.startLoginActivity(WelcomeActivity.this);
             }
         }).start();
     }

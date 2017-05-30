@@ -32,9 +32,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         mButton = (Button) findViewById(R.id.login);
         mButton.setOnClickListener(this);
+        mTextView.setOnClickListener(this);
     }
 
-    public static void startLogioActivity(Activity mActivity)
+    public static void startLoginActivity(Activity mActivity)
     {
         Intent intent = new Intent(mActivity,LoginActivity.class);
         mActivity.startActivity(intent);
@@ -47,6 +48,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             case R.id.login:
                 HomeActivity.startHomeActivity(LoginActivity.this);
                 break;
+            case R.id.register:
+                RegisterActivity.startRegisterActivity(LoginActivity.this);
             default:
                 break;
         }
