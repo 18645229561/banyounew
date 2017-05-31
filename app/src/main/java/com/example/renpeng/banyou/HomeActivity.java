@@ -21,6 +21,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private List<Fragment> fragments = new ArrayList<>();
 
+
+
     private ViewPager viewPager;
 
     private HomeAdapter homeAdapter;
