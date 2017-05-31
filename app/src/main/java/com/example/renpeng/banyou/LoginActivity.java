@@ -118,6 +118,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     String info = json.getString("info");
                     if("true" == result){
                         HomeActivity.startHomeActivity(LoginActivity.this);
+                        finish();
                     }else{
                         Toast.makeText(LoginActivity.this,info,Toast.LENGTH_SHORT).show();
                     }

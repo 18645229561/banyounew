@@ -24,6 +24,7 @@ public class WelcomeActivity extends FragmentActivity {
                 }
 
                 LoginActivity.startLoginActivity(WelcomeActivity.this);
+                finish();
             }
         }).start();
     }
