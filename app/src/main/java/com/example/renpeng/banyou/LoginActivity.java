@@ -96,11 +96,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             return;
         }
 
-
-
-       // String host = "http://192.168.1.101:8080/thundertech";
-        String host = "http://47.93.205.29/thundertech";
-        String getUrl = host + "/user/login?username="+username+ "&password=" + password;
+        String host = UrlUtils.host;
+        String getUrl = host + "user/login?username="+username+ "&password=" + password;
         HttpUtils.get(getUrl, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
