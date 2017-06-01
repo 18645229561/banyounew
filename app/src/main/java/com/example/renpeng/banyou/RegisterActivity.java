@@ -67,6 +67,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.next:
                 if(checkInfoEmpty()){
+                    User.registerName(username);
                     QuestionInfoActivity.startQuestionInfoActivity(this,username,password,sex,age,nickName);
                 }
                 break;

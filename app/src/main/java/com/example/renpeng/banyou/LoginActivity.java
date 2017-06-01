@@ -96,6 +96,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             return;
         }
 
+        User.registerName(username);
+
         String host = UrlUtils.host;
         String getUrl = host + "user/login?username="+username+ "&password=" + password;
         HttpUtils.get(getUrl, new TextHttpResponseHandler() {
