@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:text="故宫博物馆概览"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:background="#dcdcdc"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_height="1dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:text="      故宫位于北京市市中心，是一座非常特殊的博物馆。它被誉为世界五大宫之一（北京故宫、法国凡尔赛宫、英国白金汉宫、美国白宫、俄罗斯克里姆林宫），并被联合国科教文组织列为“世界文化遗产”。
+      成立于1925年的故宫博物院，建立在明清两代皇宫紫禁城的基础上，是世界上规模最大、保存最完整的木结构宫殿建筑群。全院占地72万多平方米，拥有楼宇8000余间，初建成于明永乐十八年（1420年）。最初的建设投入工匠23万人，民工士兵上百万，前后延续达15年之久。后又经明清两代多次重修和扩建，故宫仍然保持了原来的布局。
+      然而，故宫的魅力远不止如此，它还是一处可以移动文物的宝库。全馆珍藏古书画、古器物、宫廷文物、书籍档案等总数超过180万件。漫步在故宫博物院的常设文物专馆，或者欣赏频繁推出的专题文物展览，让您可以更完整地了解中华民族工艺美术的伟大成就。
+"/>
+            <TextView
+                android:id="@+id/start_study"
+                android:layout_marginTop="50dp"
+                android:text="开始学习"
+                android:padding="5dp"
+                android:background="@drawable/theme_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

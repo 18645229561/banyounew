@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".QuestionInfoActivity">
         </activity>
+        <activity android:name=".IntroductionActivity">
+        </activity>
     </application>
 
 </manifest>

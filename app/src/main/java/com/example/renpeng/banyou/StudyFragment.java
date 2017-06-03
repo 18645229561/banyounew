@@ -66,6 +66,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
                 Toast.makeText(getActivity(),"暂未开通",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.sure:
+                IntroductionActivity.startIntroductionActivity(getActivity());
                 break;
         }
     }
