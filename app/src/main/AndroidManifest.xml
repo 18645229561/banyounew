@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".SceneryDetailActivity">
         </activity>
+        <activity android:name=".TestDetailActivity">
+        </activity>
     </application>
 
 </manifest>
