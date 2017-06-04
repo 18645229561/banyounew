@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".ChangeTypeActivity">
         </activity>
+        <activity android:name=".CheckInActivity">
+        </activity>
     </application>
 
 </manifest>
