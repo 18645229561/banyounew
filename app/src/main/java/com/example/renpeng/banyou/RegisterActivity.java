@@ -21,6 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 /**
  * Created by renpeng on 17/5/30.
  */
@@ -102,7 +109,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             case R.id.next:
                 if(checkInfoEmpty()){
                     User.registerName(username);
-                    QuestionInfoActivity.startQuestionInfoActivity(this,username,password,sex,age,nickName,imgpath);
+                    checkUsername();
                 }
                 break;
             case R.id.sex:
@@ -206,5 +213,39 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private void showImage(String imaePath){
         Bitmap bm = BitmapFactory.decodeFile(imaePath);
         icon.setImageBitmap(bm);
+    }
+
+
+    private void checkUsername(){
+        User.registerName(username);
+
+        String host = UrlUtils.host;
+        String getUrl = host + "user/checkUsername?username="+username+ "&nickname=" + nickName;
+        HttpUtils.get(getUrl, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(RegisterActivity.this,"访问错误",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                String text = responseString.substring(responseString.indexOf("{"));
+                JSONTokener tokener = new JSONTokener(text);
+
+                try {
+                    JSONObject json = (JSONObject) tokener.nextValue();
+                    String result = json.getString("result");
+                    String info = json.getString("info");
+                    if("true" == result){
+                        QuestionInfoActivity.startQuestionInfoActivity(RegisterActivity.this,username,password,sex,age,nickName,imgpath);
+                        finish();
+                    }else{
+                        Toast.makeText(RegisterActivity.this,info,Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
