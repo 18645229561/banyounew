@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,7 @@ public class QuestionInfoActivity extends FragmentActivity {
     private int sex;
     private String age;
     private String nickName;
+    private String imgpath;
 
 
     @Override
@@ -63,17 +66,20 @@ public class QuestionInfoActivity extends FragmentActivity {
         sex = getIntent().getIntExtra("sex",1);
         nickName = getIntent().getStringExtra("nickname");
         age = getIntent().getStringExtra("age");
+        imgpath = getIntent().getStringExtra("imgpath");
+
     }
 
     public static void startQuestionInfoActivity(Activity mActivity,String username,
                                                  String password,int sex,String age,
-                                                 String nickname){
+                                                 String nickname,String imgpath){
         Intent intent = new Intent(mActivity,QuestionInfoActivity.class);
         intent.putExtra("username",username);
         intent.putExtra("sex",sex);
         intent.putExtra("password",password);
         intent.putExtra("age",age);
         intent.putExtra("nickname",nickname);
+        intent.putExtra("imgpath",imgpath);
         mActivity.startActivity(intent);
     }
 
@@ -86,19 +92,26 @@ public class QuestionInfoActivity extends FragmentActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                commitRegisterInfo();
+                try {
+                    commitRegisterInfo();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         mListView.addFooterView(footer);
     }
 
-    private void commitRegisterInfo(){
+    private void commitRegisterInfo() throws FileNotFoundException {
 
         String host = UrlUtils.host;
         String url = host+ "user/regist";
 
+        File file = new File(imgpath);
+
         RequestParams requestParams = new RequestParams(getParams());
+        requestParams.put("file",file);
         HttpUtils.post(url, requestParams,new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -154,6 +167,7 @@ public class QuestionInfoActivity extends FragmentActivity {
 
         String host = UrlUtils.host;
         String url = host + "subject/getSubjects";
+
 
         HttpUtils.get(url,new TextHttpResponseHandler() {
             @Override

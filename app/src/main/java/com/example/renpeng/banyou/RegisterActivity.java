@@ -32,7 +32,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
     private static final int IMAGE = 1;
-    //所需权限
+
+    private String imgpath;
 
     private Button mButton;
     private EditText mUserNameEditText;
@@ -101,7 +102,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             case R.id.next:
                 if(checkInfoEmpty()){
                     User.registerName(username);
-                    QuestionInfoActivity.startQuestionInfoActivity(this,username,password,sex,age,nickName);
+                    QuestionInfoActivity.startQuestionInfoActivity(this,username,password,sex,age,nickName,imgpath);
                 }
                 break;
             case R.id.sex:
@@ -195,8 +196,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
             c.moveToFirst();
             int columnIndex = c.getColumnIndex(filePathColumns[0]);
-            String imagePath = c.getString(columnIndex);
-            showImage(imagePath);
+            imgpath = c.getString(columnIndex);
+            showImage(imgpath);
             c.close();
         }
     }
