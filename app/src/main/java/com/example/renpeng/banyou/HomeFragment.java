@@ -128,8 +128,8 @@ public class HomeFragment extends Fragment{
     }
 
     private void getMessage(String username){
-        String host = "http://47.93.205.29/thundertech";
-        String getUrl = host + "/user/getText?username="+username;
+        String host = UrlUtils.host;
+        String getUrl = host + "user/getText?username="+username;
         HttpUtils.get(getUrl, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
