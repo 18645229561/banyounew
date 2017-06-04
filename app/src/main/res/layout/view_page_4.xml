@@ -1,11 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="3dp"
+            android:id="@+id/user_icon"
+            android:layout_width="80dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/theme_shape"
+            android:src="@mipmap/dog"
+            android:layout_height="80dp"
+            android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/username"
+            android:text="sdfsdf"
+            android:layout_toRightOf="@+id/user_icon"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_icon"
+            android:layout_below="@+id/username"
+            android:layout_marginTop="3dp"
+            android:text="伴伴币"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:id="@+id/type"
+            android:text="fdsfsf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/user_icon"
+            android:layout_marginTop="3dp"/>
+    </RelativeLayout>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:text="4"/>
+        android:layout_width="match_parent"
+        android:background="#bcbcbc"
+        android:layout_marginTop="10dp"
+        android:layout_height="1dp" />
+    <TextView
+        android:id="@+id/stydy_path"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="学习历程"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="#bcbcbc"
+        />
+    <TextView
+        android:id="@+id/setting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="设置"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="#bcbcbc"/>
+    <TextView
+        android:id="@+id/connection"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="联系我们"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="#bcbcbc"/>
 </LinearLayout>
