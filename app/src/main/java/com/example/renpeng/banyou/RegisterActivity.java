@@ -189,6 +189,26 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             return false;
         }
 
+        if(username.length()<4){
+            Toast.makeText(this,"用户名不能少于4个字符",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(nickName.length()<4){
+            Toast.makeText(this,"昵称不能少于4个字符",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(password.length()<6){
+            Toast.makeText(this,"密码不能少于4个字符",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(surePassword.length()<6){
+            Toast.makeText(this,"密码不能少于4个字符",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
     }
 
