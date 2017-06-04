@@ -20,7 +20,7 @@ public class SceneryDetailActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scenery_detail_activity);
 
-        webView = (WebView) findViewById(R.id.webview);
+        webView = (WebView) findViewById(R.id.scenery_detail);
         webView.getSettings().setJavaScriptEnabled(true);
         spotId = getIntent().getStringExtra("spotId");
         webView.loadUrl("http://47.93.205.29/thundertech/spot/getSpotInfo?spotId="+spotId + "&username=" + User.getUserName());
