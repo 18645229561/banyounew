@@ -8,4 +8,6 @@ public class CheckInEntitiy {
     public String name;
 
     public String status;
+
+    public String statusText;
 }

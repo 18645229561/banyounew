@@ -42,6 +42,8 @@ public class MeFragment extends Fragment {
 
     private TextView type;
 
+    private TextView stydyPath;
+
     private Handler handler = new Handler(){
 
         @Override
@@ -75,6 +77,15 @@ public class MeFragment extends Fragment {
         money = (TextView) view.findViewById(R.id.money);
 
         type = (TextView) view.findViewById(R.id.type);
+
+        stydyPath = (TextView) view.findViewById(R.id.stydy_path);
+
+        stydyPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckInActivity.startCheckInActivity(getActivity());
+            }
+        });
         getPicUrl();
 
         return view;

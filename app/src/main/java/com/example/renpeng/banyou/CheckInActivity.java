@@ -1,5 +1,7 @@
 package com.example.renpeng.banyou;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ListView;
@@ -23,17 +25,26 @@ public class CheckInActivity extends FragmentActivity {
 
     private ListView listView;
 
+    private CheckInAdapter checkInAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chech_in_activity);
 
         listView = (ListView) findViewById(R.id.list);
+
+        getCheckInInfos();
+    }
+
+    public static void startCheckInActivity(Activity activity){
+        Intent intent = new Intent(activity,CheckInActivity.class);
+        activity.startActivity(intent);
     }
 
     private void getCheckInInfos(){
         String host = UrlUtils.host;
-        String url = host + "subject/getSubjects";
+        String url = host + "subject/getSignedState?username=" + User.getUserName();
 
 
         HttpUtils.get(url,new TextHttpResponseHandler() {
@@ -56,8 +67,9 @@ public class CheckInActivity extends FragmentActivity {
                     for(int i = 0;i<n ; i++)
                     {
                         CheckInEntitiy checkInEntitiy = new CheckInEntitiy();
-                        checkInEntitiy.name = ((JSONObject)(jsonArray.get(i))).getString("name");
-                        checkInEntitiy.status = ((JSONObject)(jsonArray.get(i))).getString("name");
+                        checkInEntitiy.name = ((JSONObject)(jsonArray.get(i))).getString("spot_name");
+                        checkInEntitiy.status = ((JSONObject)(jsonArray.get(i))).getString("isSigned");
+                        checkInEntitiy.statusText = ((JSONObject)(jsonArray.get(i))).getString("state");
                         list.add(checkInEntitiy);
                     }
 
@@ -75,6 +87,8 @@ public class CheckInActivity extends FragmentActivity {
 
     public void setData( List<CheckInEntitiy> list){
 
+        checkInAdapter = new CheckInAdapter(list);
+        listView.setAdapter(checkInAdapter);
     }
 
 
