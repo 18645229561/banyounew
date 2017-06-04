@@ -15,6 +15,8 @@ public class TestFragment extends Fragment implements View.OnClickListener{
     private TextView medium;
     private TextView high;
 
+    private TextView changetype;
+
     private String type;
 
     @Override
@@ -25,9 +27,17 @@ public class TestFragment extends Fragment implements View.OnClickListener{
 
         medium = (TextView) view.findViewById(R.id.test1);
         high = (TextView) view.findViewById(R.id.test2);
+        changetype = (TextView) view.findViewById(R.id.changetype);
 
         medium.setOnClickListener(this);
         high.setOnClickListener(this);
+
+        changetype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangeTypeActivity.startChangeTypeActivity(getActivity());
+            }
+        });
 
         return view;
     }

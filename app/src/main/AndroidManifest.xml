@@ -37,6 +37,8 @@
         </activity>
         <activity android:name=".TestDetailActivity">
         </activity>
+        <activity android:name=".ChangeTypeActivity">
+        </activity>
     </application>
 
 </manifest>
