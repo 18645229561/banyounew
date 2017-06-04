@@ -1,14 +1,23 @@
 package com.example.renpeng.banyou;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +26,14 @@ import android.widget.Toast;
  */
 public class RegisterActivity extends FragmentActivity implements View.OnClickListener{
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE };
+
+    private static final int IMAGE = 1;
+    //所需权限
+
     private Button mButton;
     private EditText mUserNameEditText;
     private EditText mPassWordEditText;
@@ -24,6 +41,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private TextView mSexTextView;
     private TextView mAgeTextView;
     private EditText mNickNameEditText;
+    private ImageView icon;
 
     private String username;
     private String password;
@@ -34,11 +52,24 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
     private Dialog mSelectSexDialog;
 
+    public static void verifyStoragePermissions(Activity activity) {
+// Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+// We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity_layout);
         initView();
+        verifyStoragePermissions(this);
     }
 
     private void initView(){
@@ -49,10 +80,12 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         mSexTextView = (TextView) findViewById(R.id.sex);
         mAgeTextView = (TextView) findViewById(R.id.age);
         mNickNameEditText = (EditText) findViewById(R.id.name);
+        icon = (ImageView) findViewById(R.id.icon);
 
         mSexTextView.setOnClickListener(this);
         mAgeTextView.setOnClickListener(this);
         mButton.setOnClickListener(this);
+        icon.setOnClickListener(this);
 
 
     }
@@ -90,12 +123,19 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 });
                 mSelectSexDialog.show();
                 break;
-            case R.id.age:
+            case R.id.icon:
+                selectPic();
                 break;
             default:
                 break;
 
         }
+    }
+
+    private void selectPic(){
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMAGE);
     }
 
     private boolean checkInfoEmpty(){
@@ -142,5 +182,28 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
 
         return true;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //获取图片路径
+        if (requestCode == IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumns = {MediaStore.Images.Media.DATA};
+            Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePathColumns[0]);
+            String imagePath = c.getString(columnIndex);
+            showImage(imagePath);
+            c.close();
+        }
+    }
+
+    //加载图片
+    private void showImage(String imaePath){
+        Bitmap bm = BitmapFactory.decodeFile(imaePath);
+        icon.setImageBitmap(bm);
     }
 }

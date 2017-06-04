@@ -20,8 +20,33 @@
                 android:textSize="20dp"
                 />
             <RelativeLayout
-                android:id="@+id/username_rl"
+                android:id="@+id/select_icon"
                 android:layout_below="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="left"
+                android:layout_marginTop="30dp"
+                >
+                <TextView
+                    android:id="@+id/select_icon_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="选择头像:"/>
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_below="@+id/select_icon_test"
+                    android:padding="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@mipmap/dog"
+                    android:background="@drawable/theme_shape"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/username_rl"
+                android:layout_below="@+id/select_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
