@@ -19,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,7 @@ public class ChangeTypeActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.question_activity_layout);
+        setContentView(R.layout.chech_in_activity);
 
         mListView = (ListView) findViewById(R.id.list);
 
@@ -99,7 +98,7 @@ public class ChangeTypeActivity extends FragmentActivity {
     }
 
     public static void startChangeTypeActivity(Activity mActivity){
-        Intent intent = new Intent(mActivity,QuestionInfoActivity.class);
+        Intent intent = new Intent(mActivity,ChangeTypeActivity.class);
         mActivity.startActivity(intent);
     }
 
@@ -141,9 +140,7 @@ public class ChangeTypeActivity extends FragmentActivity {
     private void commitRegisterInfo(){
 
         String host = UrlUtils.host;
-        String url = host+ "user/regist";
-
-        File file = new File(imgpath);
+        String url = host+ "user/recalc?username=" +User.getUserName();
 
         RequestParams requestParams = new RequestParams(getParams());
         HttpUtils.post(url, requestParams,new TextHttpResponseHandler() {
@@ -159,11 +156,11 @@ public class ChangeTypeActivity extends FragmentActivity {
                 try {
                     JSONObject json = (JSONObject) tokener.nextValue();
                     String result = json.getString("result");
-                    String info = json.getString("info");
+                  //  String info = json.getString("info");
                     if("true" == result){
                         HomeActivity.startHomeActivity(ChangeTypeActivity.this);
                     }else{
-                        Toast.makeText(ChangeTypeActivity.this,info,Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ChangeTypeActivity.this,info,Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
