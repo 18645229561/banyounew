@@ -87,13 +87,14 @@ public class SceneryListActivity extends FragmentActivity {
         });
     }
 
-    private void setData(List<ScentryEntity> list){
+    private void setData(final List<ScentryEntity> list){
         sceneryAdapter = new SceneryAdapter(list);
         listView.setAdapter(sceneryAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                SceneryDetailActivity.startSceneryDetailActivity(SceneryListActivity.this,list.get(position).spotId);
             }
         });
     }
