@@ -26,7 +26,7 @@ public class TestDetailActivity extends FragmentActivity {
     }
 
     public static void startTestDetailActivity(Activity activity, String type){
-        Intent intent = new Intent(activity,SceneryDetailActivity.class);
+        Intent intent = new Intent(activity,TestDetailActivity.class);
         intent.putExtra("type",type);
         activity.startActivity(intent);
     }
